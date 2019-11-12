@@ -1,9 +1,7 @@
-<div class="row">
-  <div class="col col-xs-12">
-    <button class="btn btn-success"> New Recipe</button>
-  </div>
-</div>
-<hr>
+<app-recipe-cockpit (recipeCreatedEmitter)="saveRecipe($event)">
+  <p #recipeCockpitParagraphInfo>Please add a recipe</p>
+</app-recipe-cockpit>
+
 <div class="row">
   <div class="col col-xs-12">
     <div class="list-group">
