@@ -5,18 +5,7 @@
 <div class="row">
   <div class="col col-xs-12">
     <div class="list-group">
-      <a *ngFor="let recipe of recipes"
-         class="list-group-item list-group-item-action flex-column align-items-start"
-         href="#">
-        <div class="d-flex justify-content-between">
-          <div>
-            <h4>{{recipe.name}}</h4>
-            <p>{{recipe.description}}</p>
-          </div>
-          <span> <img [alt]="recipe.name" [src]="recipe.imagePath" class="img-fluid" style="max-height: 70px"/> </span>
-        </div>
-      </a>
+      <app-recipe-item *ngFor="let recipeElement of recipes" [recipe]="recipeElement" (click)="selectRecipe(recipeElement)"></app-recipe-item>
     </div>
-    <app-recipe-item></app-recipe-item>
   </div>
 </div>

@@ -1,1 +1,9 @@
-<p>recipe-item works!</p>
+<a class="list-group-item list-group-item-action flex-column align-items-start" href="#">
+  <div class="d-flex justify-content-between">
+    <div>
+      <h4>{{recipe.name}}</h4>
+      <p>{{recipe.description}}</p>
+    </div>
+    <div><img [alt]="recipe.name" [src]="recipe.imagePath" class="img-fluid"/></div>
+  </div>
+</a>
