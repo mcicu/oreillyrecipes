@@ -7,8 +7,8 @@ import {Ingredient} from '../../shared/ingredient.model';
   styleUrls: ['./shopping-edit.component.css']
 })
 export class ShoppingEditComponent implements OnInit {
-  @ViewChild('productNameInput', {static: true}) productNameInput: ElementRef<HTMLInputElement>;
-  @ViewChild('productAmountInput', {static: true}) productAmountInput: ElementRef<HTMLInputElement>;
+  @ViewChild('productNameInput', {static: true}) productNameInputRef: ElementRef<HTMLInputElement>;
+  @ViewChild('productAmountInput', {static: true}) productAmountInputRef: ElementRef<HTMLInputElement>;
   @Output() shoppingListItem = new EventEmitter<Ingredient>();
 
   constructor() {
@@ -18,9 +18,9 @@ export class ShoppingEditComponent implements OnInit {
   }
 
   addItemToList() {
-    const ingredient = new Ingredient(
-      this.productNameInput.nativeElement.value,
-      Number.parseInt(this.productAmountInput.nativeElement.value, 10));
+    const ingName = this.productNameInputRef.nativeElement.value;
+    const ingAmount = Number.parseInt(this.productAmountInputRef.nativeElement.value, 10);
+    const ingredient = new Ingredient(ingName, ingAmount);
     this.shoppingListItem.emit(ingredient);
   }
 }
