@@ -3,7 +3,7 @@
 <div class="container">
   <div class="row">
     <div class="col col-md-5">
-      <app-recipe-list (recipeSelected)="onRecipeSelected($event)"></app-recipe-list>
+      <app-recipe-list></app-recipe-list>
     </div>
     <div class="col col-md-7">
       <app-recipe-detail *ngIf="selectedRecipe; else infoText" [recipe]="selectedRecipe"></app-recipe-detail>

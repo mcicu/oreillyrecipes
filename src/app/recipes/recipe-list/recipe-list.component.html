@@ -1,11 +1,10 @@
-<app-recipe-cockpit (recipeCreatedEmitter)="saveRecipe($event)">
-  <p #recipeCockpitParagraphInfo>Please add a recipe</p>
-</app-recipe-cockpit>
+<app-recipe-cockpit></app-recipe-cockpit>
 
 <div class="row">
   <div class="col col-xs-12">
     <div class="list-group">
-      <app-recipe-item *ngFor="let recipeElement of recipes" [recipe]="recipeElement" (click)="selectRecipe(recipeElement)"></app-recipe-item>
+      <app-recipe-item (click)="selectRecipe(recipeElement)" *ngFor="let recipeElement of recipes"
+                       [recipe]="recipeElement"></app-recipe-item>
     </div>
   </div>
 </div>

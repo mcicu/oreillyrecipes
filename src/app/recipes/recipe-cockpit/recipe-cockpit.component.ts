@@ -1,5 +1,6 @@
-import {AfterContentInit, Component, ContentChild, ElementRef, EventEmitter, Output} from '@angular/core';
+import {AfterContentInit, Component} from '@angular/core';
 import {Recipe} from '../recipe.model';
+import {RecipeService} from '../services/recipe.service';
 
 @Component({
   selector: 'app-recipe-cockpit',
@@ -8,16 +9,18 @@ import {Recipe} from '../recipe.model';
 })
 export class RecipeCockpitComponent implements AfterContentInit {
 
-  @Output() recipeCreatedEmitter: EventEmitter<Recipe> = new EventEmitter<Recipe>();
-  @ContentChild('recipeCockpitParagraphInfo', {static : false}) paragraphInfo: ElementRef<HTMLParagraphElement>;
+  // @Output() recipeCreatedEmitter: EventEmitter<Recipe> = new EventEmitter<Recipe>();
+  // @ContentChild('recipeCockpitParagraphInfo', {static: false}) paragraphInfo: ElementRef<HTMLParagraphElement>;
+
+  constructor(private recipeListService: RecipeService) {
+  }
 
   saveRecipe(name: string, description: string, imagePath: string) {
     const recipe: Recipe = new Recipe(name, description, imagePath);
-    this.recipeCreatedEmitter.emit(recipe);
+    this.recipeListService.addRecipe(recipe);
   }
 
   ngAfterContentInit(): void {
     console.log('Content initialized');
-    console.log('Paragraph is: ' + this.paragraphInfo.nativeElement.innerText);
   }
 }
