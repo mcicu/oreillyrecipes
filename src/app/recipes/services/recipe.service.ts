@@ -4,7 +4,7 @@ import {LoggingService} from '../../services/logging.service';
 
 @Injectable()
 export class RecipeService {
-  recipeEmitter = new EventEmitter<Recipe>();
+  recipesChanged = new EventEmitter<Recipe[]>();
   recipeSelectedEmitter = new EventEmitter<Recipe>();
 
   private recipes: Recipe[] = [
@@ -18,7 +18,7 @@ export class RecipeService {
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
     this.loggingService.log('Added recipe ' + recipe);
-    this.recipeEmitter.emit(recipe);
+    this.recipesChanged.emit(this.getRecipes());
   }
 
   getRecipes(): Recipe[] {

@@ -3,8 +3,9 @@
 <div class="row">
   <div class="col col-xs-12">
     <div class="list-group">
-      <app-recipe-item (click)="selectRecipe(recipeElement)" *ngFor="let recipeElement of recipes"
+      <app-recipe-item *ngFor="let recipeElement of recipes"
                        [recipe]="recipeElement"></app-recipe-item>
     </div>
   </div>
 </div>
+
