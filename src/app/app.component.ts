@@ -8,9 +8,4 @@ import {RecipeService} from './recipes/services/recipe.service';
 })
 export class AppComponent {
   title = 'o\'reilly recipes';
-  loadedFeature = 'recipes';
-
-  onNavigate(feature: string) {
-    this.loadedFeature = feature;
-  }
 }
