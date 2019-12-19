@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col col-xs-12">
-    <img [src]="recipe.imagePath" [alt]="recipe.name" class="img-fluid recipeImage" />
+    <img [alt]="recipe.name" [src]="recipe.imagePath" class="img-fluid recipeImage"/>
   </div>
 </div>
 <div class="row">
@@ -10,8 +10,8 @@
 </div>
 <div class="row">
   <div class="col col-xs-12">
-    <div class="btn-group" appDropdown>
-      <button type="button" class="btn btn-primary dropdown-toggle">Manage Recipe</button>
+    <div appDropdown class="btn-group">
+      <button class="btn btn-primary dropdown-toggle" type="button">Manage Recipe</button>
       <div class="dropdown-menu">
         <a class="dropdown-item" href="#">To shopping list</a>
         <a class="dropdown-item" href="#">Edit recipe</a>
@@ -29,5 +29,8 @@
 <div class="row">
   <div class="col col-xs-12">
     Ingredients:
+    <ul>
+      <li *ngFor="let ingredient of recipe.ingredients">{{ingredient.name}} ({{ingredient.amount}})</li>
+    </ul>
   </div>
 </div>

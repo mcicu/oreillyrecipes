@@ -16,7 +16,7 @@ export class RecipeCockpitComponent implements AfterContentInit {
   }
 
   saveRecipe(name: string, description: string, imagePath: string) {
-    const recipe: Recipe = new Recipe(name, description, imagePath);
+    const recipe: Recipe = new Recipe(name, description, imagePath, []);
     this.recipeListService.addRecipe(recipe);
   }
 
