@@ -24,4 +24,10 @@ export class CartService {
     this.logger.log('Added ingredient ' + ingredient);
     this.ingredientsChanged.emit(this.getIngredients());
   }
+
+  addIngredients(ingredients: Ingredient[]) {
+    this.ingredients.push(...ingredients);
+    this.logger.log('Added ingredients ' + ingredients);
+    this.ingredientsChanged.emit(this.getIngredients());
+  }
 }
