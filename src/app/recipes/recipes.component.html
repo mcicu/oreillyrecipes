@@ -6,10 +6,23 @@
       <app-recipe-list></app-recipe-list>
     </div>
     <div class="col col-md-7">
-      <app-recipe-detail *ngIf="selectedRecipe; else infoText" [recipe]="selectedRecipe"></app-recipe-detail>
-      <ng-template #infoText>
-        Please select a recipe from the left list!
-      </ng-template>
+      <div class="row">
+        <div class="col col-sm-12">
+          <div class="d-flex justify-content-between">
+            <div (click)="onPrevRecipe()" class="btn btn-light"> &lt; Previous recipe</div>
+            <div (click)="onNextRecipe()" class="btn btn-light">Next recipe &gt;</div>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col col-sm-12">
+          <app-recipe-detail *ngIf="selectedRecipe; else infoText" [recipe]="selectedRecipe"></app-recipe-detail>
+          <ng-template #infoText>
+            Please select a recipe from the left list!
+          </ng-template>
+        </div>
+      </div>
     </div>
   </div>
 </div>
