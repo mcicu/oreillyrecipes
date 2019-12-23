@@ -1,4 +1,7 @@
-<a (click)="onSelected()" class="list-group-item list-group-item-action flex-column align-items-start" href="#">
+<a
+  class="list-group-item list-group-item-action flex-column align-items-start"
+  [routerLink]="['/recipes', recipe.id]"
+>
   <div class="d-flex justify-content-between">
     <div>
       <h4>{{recipe.name}}</h4>

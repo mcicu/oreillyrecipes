@@ -11,6 +11,7 @@ export class RecipeService {
 
   private recipes: Recipe[] = [
     new Recipe(
+      0,
       'Easy Pizza',
       'Description of recipe for Pizza',
       'https://joyfoodsunshine.com/wp-content/uploads/2016/09/easy-pizza-casserole-recipe-5.jpg',
@@ -20,7 +21,8 @@ export class RecipeService {
         new Ingredient('Pepperoni', 100)
       ]
     ),
-    new Recipe('Beef Stew',
+    new Recipe(1,
+      'Beef Stew',
       'Slow cooker recipe - Beef stew',
       'https://www.bbcgoodfood.com/sites/default/files/recipe-collections/collection-image/2013/05/beef-stew-slow-cooker.jpg',
       [
@@ -33,7 +35,8 @@ export class RecipeService {
   constructor(private loggingService: LoggingService, private cartService: CartService) {
   }
 
-  addRecipe(recipe: Recipe) {
+  addRecipe(recipeDTO: { name: string, description: string, imagePath: string, ingredients: Ingredient[] }) {
+    const recipe = new Recipe(this.recipes.length, recipeDTO.name, recipeDTO.description, recipeDTO.imagePath, recipeDTO.ingredients);
     this.recipes.push(recipe);
     this.loggingService.log('Added recipe ' + recipe);
     this.recipesChanged.emit(this.getRecipes());
@@ -41,6 +44,10 @@ export class RecipeService {
 
   getRecipes(): Recipe[] {
     return this.recipes.slice();
+  }
+
+  getRecipe(index: number): Recipe {
+    return this.recipes[index];
   }
 
   addIngredients(ingredients: Ingredient[]) {

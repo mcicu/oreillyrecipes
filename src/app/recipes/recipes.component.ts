@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Recipe} from './recipe.model';
 import {RecipeService} from './services/recipe.service';
 import {LoggingService} from '../services/logging.service';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-recipes',
@@ -9,19 +11,29 @@ import {LoggingService} from '../services/logging.service';
   styleUrls: ['./recipes.component.css'],
   providers: [RecipeService]
 })
-export class RecipesComponent implements OnInit {
+export class RecipesComponent implements OnInit, OnDestroy {
 
   selectedRecipe: Recipe;
-  private loggingService: LoggingService;
-  private recipeService: RecipeService;
+  recipeSelectedSubscription: Subscription;
 
-  constructor(loggingService: LoggingService, recipeService: RecipeService) {
-    this.loggingService = loggingService;
-    this.recipeService = recipeService;
-    recipeService.recipeSelectedEmitter.subscribe(recipe => this.onRecipeSelected(recipe));
+  constructor(private loggingService: LoggingService,
+              private recipeService: RecipeService,
+              private route: ActivatedRoute) {
+
   }
 
   ngOnInit() {
+    this.recipeSelectedSubscription = this.recipeService.recipeSelectedEmitter.subscribe(
+      recipe => this.onRecipeSelected(recipe));
+    this.route.params.subscribe(
+      params => {
+        const recipeId = Number.parseInt(params.recipeId, 0);
+        this.selectedRecipe = this.recipeService.getRecipe(recipeId);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.recipeSelectedSubscription.unsubscribe();
   }
 
   onRecipeSelected(recipe: Recipe) {
