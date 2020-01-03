@@ -13,23 +13,17 @@ import {RecipeCockpitComponent} from './recipes/recipe-cockpit/recipe-cockpit.co
 import {DropdownDirective} from './shared/dropdown.directive';
 import {LoggingService} from './services/logging.service';
 import {CartService} from './shopping-list/services/cart.service';
-import {RouterModule, Routes} from '@angular/router';
-import { HomepageComponent } from './homepage/homepage.component';
-
-const appRoutes: Routes = [
-  {path: '', component: HomepageComponent},
-  {path: 'recipes', component: RecipesComponent},
-  {path: 'recipes/:recipeId', component: RecipesComponent},
-  {path: 'shopping-list', component: ShoppingListComponent, data: {title: 'Shopping List'}}
-];
+import {HomepageComponent} from './homepage/homepage.component';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent, HeaderComponent, RecipesComponent, RecipeListComponent, RecipeDetailComponent, RecipeItemComponent,
-    ShoppingListComponent, ShoppingEditComponent, RecipeCockpitComponent, DropdownDirective, HomepageComponent
+    ShoppingListComponent, ShoppingEditComponent, RecipeCockpitComponent, DropdownDirective, HomepageComponent, PageNotFoundComponent
   ],
   imports: [
-    BrowserModule, RouterModule.forRoot(appRoutes)
+    BrowserModule, AppRoutingModule
   ],
   providers: [LoggingService, CartService],
   bootstrap: [AppComponent]
