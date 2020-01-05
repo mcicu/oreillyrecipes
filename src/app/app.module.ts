@@ -16,6 +16,8 @@ import {CartService} from './shopping-list/services/cart.service';
 import {HomepageComponent} from './homepage/homepage.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {AppRoutingModule} from './app-routing.module';
+import {AuthenticationService} from './services/authentication.service';
+import {AuthenticationGuard} from './services/authentication-guard.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,7 @@ import {AppRoutingModule} from './app-routing.module';
   imports: [
     BrowserModule, AppRoutingModule
   ],
-  providers: [LoggingService, CartService],
+  providers: [LoggingService, CartService, AuthenticationService, AuthenticationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
