@@ -1,10 +1,13 @@
 import {Ingredient} from '../../shared/ingredient.model';
-import {EventEmitter, Injectable} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {LoggingService} from '../../services/logging.service';
+import {Subject} from 'rxjs';
 
 @Injectable()
 export class CartService {
-  ingredientsChanged = new EventEmitter<Ingredient[]>();
+
+  ingredientsChangedSubject = new Subject<Ingredient[]>();
+
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Tomatoes', 10)
@@ -22,12 +25,12 @@ export class CartService {
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
     this.logger.log('Added ingredient ' + ingredient);
-    this.ingredientsChanged.emit(this.getIngredients());
+    this.ingredientsChangedSubject.next(this.getIngredients());
   }
 
   addIngredients(ingredients: Ingredient[]) {
     this.ingredients.push(...ingredients);
     this.logger.log('Added ingredients ' + ingredients);
-    this.ingredientsChanged.emit(this.getIngredients());
+    this.ingredientsChangedSubject.next(this.getIngredients());
   }
 }
