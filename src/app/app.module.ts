@@ -18,6 +18,7 @@ import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {AppRoutingModule} from './app-routing.module';
 import {AuthenticationService} from './services/authentication.service';
 import {AuthenticationGuard} from './services/authentication-guard.service';
+import {FormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import {AuthenticationGuard} from './services/authentication-guard.service';
     ShoppingListComponent, ShoppingEditComponent, RecipeCockpitComponent, DropdownDirective, HomepageComponent, PageNotFoundComponent
   ],
   imports: [
-    BrowserModule, AppRoutingModule
+    BrowserModule, AppRoutingModule, FormsModule
   ],
   providers: [LoggingService, CartService, AuthenticationService, AuthenticationGuard],
   bootstrap: [AppComponent]

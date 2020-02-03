@@ -1,19 +1,20 @@
-<form #recipeCockpitForm>
+<form (ngSubmit)="onSubmit()" #inputForm='ngForm'> <!-- also works with (ngSubmit)='onSubmit(inputForm)' #inputForm='ngForm' -->
   <div class="form-row">
     <label for="recipeName">Recipe Name</label>
-    <input type="text" class="form-control" id="recipeName" name="recipeName" #recipeName>
+    <input type="text" class="form-control" id="recipeName" name="recipeName" ngModel>
   </div>
   <div class="form-row">
     <label for="recipeDescription">Recipe Description</label>
-    <input type="text" class="form-control" id="recipeDescription" name="recipeDescription" #recipeDescription>
+    <input type="text" class="form-control" id="recipeDescription" name="recipeDescription" ngModel>
   </div>
   <div class="form-row">
     <label for="recipeImagePath">Recipe image</label>
-    <input type="text" class="form-control" id="recipeImagePath" name="recipeImagePath" #recipeImagePath>
+    <input type="text" class="form-control" id="recipeImagePath" name="recipeImagePath" ngModel>
   </div>
 
+
   <div class="form-row">
-    <button type="button" class="btn btn-success" (click)="saveRecipe(recipeName.value, recipeDescription.value, recipeImagePath.value)">Add recipe</button>
+    <button type="submit" class="btn btn-success">Add recipe</button>
   </div>
 </form>
 

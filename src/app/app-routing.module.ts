@@ -6,11 +6,13 @@ import {RecipeDetailComponent} from './recipes/recipe-detail/recipe-detail.compo
 import {ShoppingListComponent} from './shopping-list/shopping-list.component';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import {AuthenticationGuard} from './services/authentication-guard.service';
+import {RecipeCockpitComponent} from './recipes/recipe-cockpit/recipe-cockpit.component';
 
 const appRoutes: Routes = [
   {path: '', component: HomepageComponent},
   {
     path: 'recipes', component: RecipesComponent, children: [
+      {path: 'new', component: RecipeCockpitComponent, canActivateChild: [AuthenticationGuard]},
       {path: ':recipeId', component: RecipeDetailComponent, canActivate: [AuthenticationGuard]}
     ]
   },

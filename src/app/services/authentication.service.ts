@@ -1,5 +1,5 @@
 export class AuthenticationService {
-  private loggedIn = false;
+  private loggedIn = true;
 
   login() {
     this.loggedIn = true;

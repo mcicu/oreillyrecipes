@@ -1,6 +1,7 @@
-import {AfterContentInit, Component} from '@angular/core';
+import {AfterContentInit, Component, ViewChild} from '@angular/core';
 import {Recipe} from '../recipe.model';
 import {RecipeService} from '../services/recipe.service';
+import {NgForm} from "@angular/forms";
 
 @Component({
   selector: 'app-recipe-cockpit',
@@ -9,8 +10,7 @@ import {RecipeService} from '../services/recipe.service';
 })
 export class RecipeCockpitComponent implements AfterContentInit {
 
-  // @Output() recipeCreatedEmitter: EventEmitter<Recipe> = new EventEmitter<Recipe>();
-  // @ContentChild('recipeCockpitParagraphInfo', {static: false}) paragraphInfo: ElementRef<HTMLParagraphElement>;
+  @ViewChild('inputForm', {static: false}) ngForm: NgForm;
 
   constructor(private recipeListService: RecipeService) {
   }
@@ -22,5 +22,13 @@ export class RecipeCockpitComponent implements AfterContentInit {
 
   ngAfterContentInit(): void {
     console.log('Content initialized');
+  }
+
+  onSubmit() {
+    console.log(this.ngForm.value);
+    const name = this.ngForm.value.recipeName;
+    const description = this.ngForm.value.recipeDescription;
+    const imagePath = this.ngForm.value.recipeImagePath;
+    this.saveRecipe(name, description, imagePath);
   }
 }
