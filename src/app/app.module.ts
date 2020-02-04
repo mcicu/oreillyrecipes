@@ -19,6 +19,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AuthenticationService} from './services/authentication.service';
 import {AuthenticationGuard} from './services/authentication-guard.service';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {RecipeService} from './recipes/services/recipe.service';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
   imports: [
     BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule
   ],
-  providers: [LoggingService, CartService, AuthenticationService, AuthenticationGuard],
+  providers: [RecipeService, CartService, LoggingService, AuthenticationService, AuthenticationGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
