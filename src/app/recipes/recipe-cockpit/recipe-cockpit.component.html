@@ -1,15 +1,15 @@
-<form (ngSubmit)="onSubmit()" #inputForm='ngForm'> <!-- also works with (ngSubmit)='onSubmit(inputForm)' #inputForm='ngForm' -->
+<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()"> <!-- also works with (ngSubmit)='onSubmit(inputForm)' #inputForm='ngForm' -->
   <div class="form-row">
     <label for="recipeName">Recipe Name</label>
-    <input type="text" class="form-control" id="recipeName" name="recipeName" ngModel>
+    <input type="text" class="form-control" id="recipeName" formControlName="recipeName">
   </div>
   <div class="form-row">
     <label for="recipeDescription">Recipe Description</label>
-    <input type="text" class="form-control" id="recipeDescription" name="recipeDescription" ngModel>
+    <input type="text" class="form-control" id="recipeDescription" formControlName="recipeDescription">
   </div>
   <div class="form-row">
     <label for="recipeImagePath">Recipe image</label>
-    <input type="text" class="form-control" id="recipeImagePath" name="recipeImagePath" ngModel>
+    <input type="text" class="form-control" id="recipeImagePath" formControlName="recipeImagePath">
   </div>
 
 
