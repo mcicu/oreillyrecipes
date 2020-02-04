@@ -1,20 +1,34 @@
-<form [formGroup]="recipeForm" (ngSubmit)="onSubmit()"> <!-- also works with (ngSubmit)='onSubmit(inputForm)' #inputForm='ngForm' -->
+<form (ngSubmit)="onSubmit()" [formGroup]="recipeForm">
+  <!-- also works with (ngSubmit)='onSubmit(inputForm)' #inputForm='ngForm' -->
   <div class="form-row">
     <label for="recipeName">Recipe Name</label>
-    <input type="text" class="form-control" id="recipeName" formControlName="recipeName">
+    <input class="form-control" formControlName="recipeName" id="recipeName" type="text">
   </div>
   <div class="form-row">
     <label for="recipeDescription">Recipe Description</label>
-    <input type="text" class="form-control" id="recipeDescription" formControlName="recipeDescription">
+    <input class="form-control" formControlName="recipeDescription" id="recipeDescription" type="text">
   </div>
   <div class="form-row">
     <label for="recipeImagePath">Recipe image</label>
-    <input type="text" class="form-control" id="recipeImagePath" formControlName="recipeImagePath">
+    <input class="form-control" formControlName="recipeImagePath" id="recipeImagePath" type="text">
   </div>
 
+  <div class="form-group mt-4" formArrayName="ingredientsArray">
+    Ingredients:
+    <button class="btn btn-success" type="button" (click)="onAddIngredientToForm()">Add ingredient</button>
+
+    <div *ngFor="let ingredientControl of recipeForm.get('ingredientsArray').controls; let ingredientIndex=index"
+         [formGroupName]="ingredientIndex"
+         class="form-group form-inline mt-4">
+      <label>Name:</label>
+      <input class="form-control mr-2" formControlName="name">
+      <label>Amount</label>
+      <input class="form-control mr-2" formControlName="amount">
+    </div>
+  </div>
 
   <div class="form-row">
-    <button type="submit" class="btn btn-success">Add recipe</button>
+    <button class="btn btn-primary" type="submit">Add recipe</button>
   </div>
 </form>
 

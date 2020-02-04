@@ -1,7 +1,6 @@
-import {AfterContentInit, Component, OnInit, ViewChild} from '@angular/core';
-import {Recipe} from '../recipe.model';
+import {Component, OnInit} from '@angular/core';
 import {RecipeService} from '../services/recipe.service';
-import {FormGroup, FormControl} from '@angular/forms';
+import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-recipe-cockpit',
@@ -17,9 +16,10 @@ export class RecipeCockpitComponent implements OnInit {
 
   ngOnInit() {
     this.recipeForm = new FormGroup({
-      recipeName: new FormControl(null),
-      recipeDescription: new FormControl(null),
-      recipeImagePath: new FormControl('URL here')
+      recipeName: new FormControl(null, Validators.required),
+      recipeDescription: new FormControl(null, Validators.required),
+      recipeImagePath: new FormControl('URL here'),
+      ingredientsArray: new FormArray([])
     });
   }
 
@@ -28,11 +28,28 @@ export class RecipeCockpitComponent implements OnInit {
     const name = this.recipeForm.value.recipeName;
     const description = this.recipeForm.value.recipeDescription;
     const imagePath = this.recipeForm.value.recipeImagePath;
-    this.saveRecipe(name, description, imagePath);
+    const ingredients = this.recipeForm.value.ingredientsArray;
+    this.saveRecipe(name, description, imagePath, ingredients);
   }
 
-  saveRecipe(name: string, description: string, imagePath: string) {
-    const recipe = {name, description, imagePath, ingredients: []};
+  onAddIngredientToForm() {
+    const ingredientsArray = this.recipeForm.get('ingredientsArray') as FormArray;
+    const ingredientFormGroup = new FormGroup({
+      name: new FormControl(null, Validators.required),
+      amount: new FormControl(null, [Validators.required, this.ingredientAmountValidator])
+    });
+    ingredientsArray.push(ingredientFormGroup);
+  }
+
+  saveRecipe(name: string, description: string, imagePath: string, ingredients: { name: string, amount: number }[]) {
+    const recipe = {name, description, imagePath, ingredients};
     this.recipeListService.addRecipe(recipe);
+  }
+
+  ingredientAmountValidator(input: FormControl): ValidationErrors {
+    if (false === /^\d*(\.\d+)?$/.test(input.value)) {
+      return {valueIsNaN: true};
+    }
+    return null;
   }
 }
