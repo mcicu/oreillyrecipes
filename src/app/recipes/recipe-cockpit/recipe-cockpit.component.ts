@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RecipeService} from '../services/recipe.service';
 import {FormArray, FormControl, FormGroup, ValidationErrors, Validators} from '@angular/forms';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-recipe-cockpit',
@@ -16,10 +17,14 @@ export class RecipeCockpitComponent implements OnInit {
 
   ngOnInit() {
     this.recipeForm = new FormGroup({
-      recipeName: new FormControl(null, Validators.required),
+      recipeName: new FormControl(null, Validators.required, this.delayedNameValidator),
       recipeDescription: new FormControl(null, Validators.required),
       recipeImagePath: new FormControl('URL here'),
       ingredientsArray: new FormArray([])
+    });
+
+    this.recipeForm.get('recipeName').statusChanges.subscribe(next => {
+      console.log(next);
     });
   }
 
@@ -51,5 +56,19 @@ export class RecipeCockpitComponent implements OnInit {
       return {valueIsNaN: true};
     }
     return null;
+  }
+
+  delayedNameValidator(input: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        console.log('called async validator');
+        if (input.value === 'test') {
+          resolve({testIsForbidden: true});
+        } else {
+          resolve(null);
+        }
+      }, 1500);
+    });
+    return promise;
   }
 }
