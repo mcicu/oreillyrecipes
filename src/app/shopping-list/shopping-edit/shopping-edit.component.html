@@ -1,21 +1,25 @@
 <div class="row">
   <div class="col col-xs-12">
-    <form>
+    <form #f=ngForm>
       <div class="row">
         <div class="col col-sm-8 form-group">
           <label for="name">Name</label>
-          <input type="text" id="name" class="form-control" #productNameInput>
+          <input class="form-control" id="name" name="name" ngModel type="text">
         </div>
         <div class="col col-sm-4 form-group">
           <label for="amount">Amount</label>
-          <input type="number" id="amount" class="form-control" #productAmountInput>
+          <input class="form-control" id="amount" name="amount" ngModel type="number">
         </div>
       </div>
       <div class="row">
         <div class="col col-xs-12">
-          <button class="btn btn-success m-sm-1" type="button" (click)="addItemToList()">Add</button>
-          <button class="btn btn-danger m-sm-1" type="button">Delete</button>
-          <button class="btn btn-primary m-sm-1" type="button">Clear</button>
+          <button (click)="addItemToList()" class="btn btn-success m-sm-1" type="button">
+            {{editMode ? 'Update' : 'Add'}}
+          </button>
+          <button (click)="onDeleteIngredient()" [disabled]="!editMode" class="btn btn-danger m-sm-1" type="button">
+            Delete
+          </button>
+          <button (click)="clearForm()" class="btn btn-primary m-sm-1" type="button">Clear</button>
         </div>
       </div>
     </form>
